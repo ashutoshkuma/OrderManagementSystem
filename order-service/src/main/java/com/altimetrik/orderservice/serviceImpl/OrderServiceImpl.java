@@ -53,32 +53,29 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	private void updateOrderItems(List<OrderItem> list) {
-		for(OrderItem item:list) 
-			proxy.updateOrderItem(item);
-		
+				
+		list.stream().forEach(item->proxy.updateOrderItem(item));
 	}
 
 	private List<OrderItem> checkAvailability(List<OrderItem> items) {
 		
 		List<OrderItem> list=new ArrayList<OrderItem>();
-		for(OrderItem item:items) {
+		items.stream().forEach(item->{
 			try {
 				list.add(proxy.getOrderItemByProductNameCodeAndQuantity(item.getProductName(),
 						item.getProductCode(),item.getQuantity()));
 			}catch(Exception e){
 				throw new OrderItemNotFoundException("Item Not found with product Name "+item.getProductName()+
-						" product Code "+item.getProductCode()+ " and quantity "+item.getQuantity());	
-				
-			}			
-		}
-		return list;
-		
-		
+						" product Code "+item.getProductCode()+ " and quantity "+item.getQuantity());				
+			}	
+		});
+		return list;		
 	}
 
+	
 	@Override
 	public OrderItem getOrderItemByProductNameCodeAndQuantity(String pName,String pcode, Integer quantity) {
-		// TODO Auto-generated method stub
+		
 		return proxy.getOrderItemByProductNameCodeAndQuantity(pName, pcode, quantity);
 	}
 

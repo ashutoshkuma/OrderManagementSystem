@@ -58,7 +58,8 @@ public class OrderItemServiceController {
 		if(orderItem.isPresent())
 				return orderItem.get();
 		else
-			throw new OrderItemNotFoundException("Item Not found with product Code "+pCode+ " and quantity "+quantity );	
+			throw new OrderItemNotFoundException("Item Not found with product Name "+pName+
+					" product Code "+pCode+ " and quantity "+quantity );	
 		
 	}	
 	

@@ -2,6 +2,7 @@ package com.altimetrik.orderitemservice.exception;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

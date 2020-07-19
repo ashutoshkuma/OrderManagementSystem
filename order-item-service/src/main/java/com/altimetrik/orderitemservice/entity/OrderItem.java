@@ -1,8 +1,10 @@
 package com.altimetrik.orderitemservice.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -23,6 +25,7 @@ public class OrderItem {
 	@Size(min=2, message="Product name should have atleast 2 characters")
 	private String productName;
 	
+	@Column(unique=true)
 	@NotNull(message="Product Code should not be null")
 	@ApiModelProperty(notes="Product Code should have atleast 2 characters")
 	@Size(min=1, message="Product code should have atleast 1 characters")
