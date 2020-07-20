@@ -7,7 +7,6 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,14 +22,18 @@ import com.altimetrik.orderitemservice.repository.OrderItemRepository;
 
 
 
+/**
+ * @author Ashutosh
+ * REST controller for managing Order Items
+ */
 @RestController
 public class OrderItemServiceController {
 	
 	@Autowired
 	private OrderItemRepository repository;
 	
-	@GetMapping("/orderItems")
-	public List<OrderItem> getOrderItem(){	
+	@GetMapping("/orderItem")
+	public List<OrderItem> getAllOrderItems(){	
 		List<OrderItem> orderItems=repository.findAll();
 		if(orderItems.isEmpty())
 			throw new OrderItemNotFoundException("No Items found");
@@ -50,7 +53,7 @@ public class OrderItemServiceController {
 	}	
 	
 	@GetMapping("/checkorderItems/{pName}/{pCode}/{quantity}")
-	public OrderItem getOrderItemByProductNameCodeAndQuantity(@PathVariable String pName,
+	public OrderItem checkOrderItemByProductNameCodeAndQuantity(@PathVariable String pName,
 			@PathVariable String pCode,@PathVariable Integer quantity){
 		
 		Optional<OrderItem> orderItem=repository.findByProductNameAndProductCodeAndQuantityGreaterThanEqual(pName,
@@ -76,7 +79,7 @@ public class OrderItemServiceController {
 	}
 	
 	@PostMapping("/orderItem")
-	public ResponseEntity<Object> createOrder(@Valid @RequestBody OrderItem orderItem){
+	public ResponseEntity<Object> createOrderItem(@Valid @RequestBody OrderItem orderItem){
 		OrderItem item=repository.save(orderItem);
 		
 		URI location= ServletUriComponentsBuilder.
