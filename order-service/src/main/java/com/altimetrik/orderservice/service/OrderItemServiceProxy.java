@@ -18,7 +18,7 @@ public interface OrderItemServiceProxy {
 	public OrderItem getOrderItemByProductCode(@PathVariable String pCode);
 	
 	@GetMapping("/checkorderItems/{pName}/{pCode}/{quantity}")
-	public OrderItem getOrderItemByProductNameCodeAndQuantity(@PathVariable String pName,
+	public OrderItem checkOrderItemByProductNameCodeAndQuantity(@PathVariable String pName,
 			@PathVariable String pCode,@PathVariable Integer quantity);
 	
 	@PutMapping("/orderItem")

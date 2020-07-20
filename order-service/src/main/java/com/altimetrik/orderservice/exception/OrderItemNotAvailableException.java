@@ -1,12 +1,12 @@
 package com.altimetrik.orderservice.exception;
 
-public class OrderItemNotFoundException extends RuntimeException {
+public class OrderItemNotAvailableException extends RuntimeException {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public OrderItemNotFoundException(String msg){
+	public OrderItemNotAvailableException(String msg){
 		super(msg);
 	}
 }

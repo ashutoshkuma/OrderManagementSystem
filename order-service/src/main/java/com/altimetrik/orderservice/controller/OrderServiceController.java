@@ -32,8 +32,8 @@ public class OrderServiceController {
 	@Autowired
 	private OrderService service;
 	
-	@GetMapping("/orders")
-	public List<Order> getOrders(){
+	@GetMapping("/order")
+	public List<Order> getAllOrders(){
 		
 		List<Order> orders=repository.findAll();
 		if(orders.isEmpty())
@@ -43,7 +43,7 @@ public class OrderServiceController {
 		
 	}
 	
-	@GetMapping("/ordersFeign/{pcode}")
+	@GetMapping("/orderFeign/{pcode}")
 	public OrderItem getOrderItemByProductCodeFeign(@PathVariable String pcode){
 		
 		OrderItem items= proxy.getOrderItemByProductCode(pcode);		
@@ -51,16 +51,16 @@ public class OrderServiceController {
 		
 	}
 	
-	@GetMapping("/ordersFeign/{pName}/{pcode}/{quantity}")
-	public OrderItem getOrderItemByProductNameCodeQuantityFeign(@PathVariable String pName,@PathVariable String pcode,
+	@GetMapping("/orderFeign/{pName}/{pcode}/{quantity}")
+	public OrderItem checkOrderItemByProductNameCodeQuantityFeign(@PathVariable String pName,@PathVariable String pcode,
 			@PathVariable Integer quantity){
 				
-		OrderItem items= service.getOrderItemByProductNameCodeAndQuantity(pName,pcode, quantity);
+		OrderItem items= service.checkOrderItemByProductNameCodeAndQuantity(pName,pcode, quantity);
 		return items;
 		
 	}
 
-	@GetMapping("/orders/{id}")
+	@GetMapping("/order/{id}")
 	public Order getOrder(@PathVariable Long id){
 		
 		Optional<Order> order=repository.findById(id);
@@ -71,7 +71,7 @@ public class OrderServiceController {
 		
 	}
 	
-	@PostMapping("/orders")
+	@PostMapping("/order")
 	public ResponseEntity<Object> createOrder(@Valid @RequestBody Order order){
 		
 		Order ord=service.createNewOrder(order);		

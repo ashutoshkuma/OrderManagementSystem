@@ -30,8 +30,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 		return new ResponseEntity<ExceptionResponse>(exceptionResponse,HttpStatus.NOT_FOUND);		
 	}
 	
-	@ExceptionHandler(OrderItemNotFoundException.class)
-	public final ResponseEntity<ExceptionResponse> handleOrderNotFoundException(OrderItemNotFoundException ex, WebRequest request)  {		
+	@ExceptionHandler(OrderItemNotAvailableException.class)
+	public final ResponseEntity<ExceptionResponse> handleOrderNotFoundException(OrderItemNotAvailableException ex, WebRequest request)  {		
 		ExceptionResponse exceptionResponse=new ExceptionResponse(LocalDateTime.now(), ex.getMessage(),
 				request.getDescription(false));
 		return new ResponseEntity<ExceptionResponse>(exceptionResponse,HttpStatus.NOT_FOUND);		

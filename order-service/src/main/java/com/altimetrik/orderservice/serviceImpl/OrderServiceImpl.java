@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.altimetrik.orderservice.entity.Order;
 import com.altimetrik.orderservice.entity.OrderItem;
-import com.altimetrik.orderservice.exception.OrderItemNotFoundException;
+import com.altimetrik.orderservice.exception.OrderItemNotAvailableException;
 import com.altimetrik.orderservice.repository.OrderRepository;
 import com.altimetrik.orderservice.service.OrderItemServiceProxy;
 import com.altimetrik.orderservice.service.OrderService;
@@ -62,10 +62,10 @@ public class OrderServiceImpl implements OrderService{
 		List<OrderItem> list=new ArrayList<OrderItem>();
 		items.stream().forEach(item->{
 			try {
-				list.add(proxy.getOrderItemByProductNameCodeAndQuantity(item.getProductName(),
+				list.add(proxy.checkOrderItemByProductNameCodeAndQuantity(item.getProductName(),
 						item.getProductCode(),item.getQuantity()));
 			}catch(Exception e){
-				throw new OrderItemNotFoundException("Item Not found with product Name "+item.getProductName()+
+				throw new OrderItemNotAvailableException("Item Not available with product Name "+item.getProductName()+
 						" product Code "+item.getProductCode()+ " and quantity "+item.getQuantity());				
 			}	
 		});
@@ -74,9 +74,9 @@ public class OrderServiceImpl implements OrderService{
 
 	
 	@Override
-	public OrderItem getOrderItemByProductNameCodeAndQuantity(String pName,String pcode, Integer quantity) {
+	public OrderItem checkOrderItemByProductNameCodeAndQuantity(String pName,String pcode, Integer quantity) {
 		
-		return proxy.getOrderItemByProductNameCodeAndQuantity(pName, pcode, quantity);
+		return proxy.checkOrderItemByProductNameCodeAndQuantity(pName, pcode, quantity);
 	}
 
 }

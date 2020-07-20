@@ -12,6 +12,6 @@ public interface OrderService {
 
 	public Order createNewOrder(@Valid Order order);
 
-	public OrderItem getOrderItemByProductNameCodeAndQuantity(String pname, String pcode, Integer quantity);
+	public OrderItem checkOrderItemByProductNameCodeAndQuantity(String pname, String pcode, Integer quantity);
 
 }
